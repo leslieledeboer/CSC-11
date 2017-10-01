@@ -11,8 +11,9 @@
     difference_msg: .asciz "The difference of %d and %d is %d.\n\n"
     product_msg: .asciz "The product of %d and %d is %d.\n\n"
     input_strng: .asciz "%d"
+    new_line: .asciz "\n"
 
-.section .rodata
+.section .data
     number_1: .word 0
     number_2: .word 0
     sum: .word 0
@@ -40,6 +41,9 @@
         ldr r1, =number_2
         bl scanf
 
+        ldr r0, =new_line
+        bl printf
+
         ldr r0, =number_1
         ldr r0, [r0]
         ldr r1, =number_2
@@ -48,17 +52,17 @@
         add r2, r0, r1
 
         ldr r3, =sum
-        str r2, r3
+        str r2, [r3]
 
         sub r2, r1, r0
 
         ldr r3, =difference
-        str r2, r3
+        str r2, [r3]
 
         mul r2, r0, r1
 
         ldr r3, =product
-        str r2, r3
+        str r2, [r3]
         
         ldr r0, =sum_msg
         ldr r1, =number_1
